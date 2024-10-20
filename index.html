@@ -12,8 +12,8 @@
     <header>
         <nav>
             <ul class="header-nav-tabs">
-                <li><a href="#home" onclick="loadContent('html/home.html')">Sydney Weisberg</a></li>
-                <li><a href="#projects" onclick="loadContent('html/projects.html')">Projects</a></li>
+                <li><a href="#home" onclick="navigateTo('html/home.html')">Sydney Weisberg</a></li>
+                <li><a href="#projects" onclick="navigateTo('html/projects.html')">Projects</a></li>
             </ul>
         </nav>
     </header>
@@ -25,6 +25,7 @@
         <p>Smith College</p>
         <a href="https://github.com/sydneyweisberg"><i class="fa fa-fw fa-user"></i> GitHub</a>
         <a href="https://www.linkedin.com/in/sydney-weisberg-326134240"><i class="fa fa-fw fa-wrench"></i> LinkedIn</a>
+        <p1>sydneyweisberg@icloud.com</p1>
     </div>
 
     <div id="content">
@@ -38,6 +39,7 @@
                 .then(response => response.text())
                 .then(html => {
                     contentDiv.innerHTML = html;
+                    localStorage.setItem('currentPage', page);
                 })
                 .catch(error => {
                     contentDiv.innerHTML = "Error loading page.";
@@ -45,8 +47,13 @@
         }
 
         window.onload = function() {
-            loadContent('html/home.html');
+            const savedPage = localStorage.getItem('currentPage') || 'html/home.html';
+            loadContent(savedPage);
         };
+
+        function navigateTo(page) {
+            loadContent(page);
+        }
     </script>
 
 </body>
