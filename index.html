@@ -1,9 +1,53 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Test</title>
-    </head>
-    <body>
-        <h1>Test</h1>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <ul class="header-nav-tabs">
+                <li><a href="#home" onclick="loadContent('html/home.html')">Sydney Weisberg</a></li>
+                <li><a href="#projects" onclick="loadContent('html/projects.html')">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="assets/images/sydney_weisberg_photo.jpg">
+        <p><strong>Sydney Weisberg</strong></p>
+        <p>Undergraduate Computer Science Major</p>
+        <p>Smith College</p>
+        <a href="https://github.com/sydneyweisberg"><i class="fa fa-fw fa-user"></i> GitHub</a>
+        <a href="https://www.linkedin.com/in/sydney-weisberg-326134240"><i class="fa fa-fw fa-wrench"></i> LinkedIn</a>
+    </div>
+
+    <div id="content">
+        <!-- Initially, this will be empty and populated with the home.html content -->
+    </div>
+
+    <script>
+        function loadContent(page) {
+            const contentDiv = document.getElementById('content');
+            fetch(page)
+                .then(response => response.text())
+                .then(html => {
+                    contentDiv.innerHTML = html;
+                })
+                .catch(error => {
+                    contentDiv.innerHTML = "Error loading page.";
+                });
+        }
+
+        window.onload = function() {
+            loadContent('html/home.html');
+        };
+    </script>
+
+</body>
 </html>
